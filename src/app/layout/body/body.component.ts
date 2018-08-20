@@ -1,5 +1,4 @@
-import {Component, ElementRef, HostListener, OnInit} from '@angular/core';
-import {setStyles} from '@angular/animations/browser/src/util';
+import {Component, HostListener, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-body',
@@ -15,16 +14,20 @@ export class BodyComponent implements OnInit {
   }
 
   @HostListener('click', ['$event'])
-  onPointerDown(event: MouseEvent): void {
-    let element = (<HTMLDivElement>event.target);
+  onClick(event: MouseEvent): void {
+    const element = (<HTMLDivElement>event.target);
     console.log(event);
     console.log(element.style);
-    let st = getComputedStyle(element, null);
-    // st.setProperty('background', '#eeeeee');
-    console.log(st);
-    // setStyles(element, {'background': 'red'});
+    // let st = getComputedStyle(element, null);
 
-    let styl = element.style;
-    styl.setProperty('background', '#eeeeee')
+    const styl = element.style;
+    styl.setProperty('background', '#eeeeee');
+  }
+
+
+  @HostListener('mouseenter', ['$event'])
+  onHover(event: MouseEvent): void {
+    const element = (<HTMLDivElement>event.target);
+    console.log('hover', element);
   }
 }
