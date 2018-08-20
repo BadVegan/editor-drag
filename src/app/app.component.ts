@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+
+  // onDragStar(event: PointerEvent) {
+  //   console.log('onDragStar', event);
+  // }
+  //
+  // onDragMove(event: PointerEvent) {
+  //  // console.log('onDragMove', event);
+  // }
+  //
+  // onDragEnd(event: PointerEvent) {
+  //   console.log('onDragEnd', event);
+  // }
 }
