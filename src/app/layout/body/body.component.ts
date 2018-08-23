@@ -1,4 +1,4 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit, Renderer2} from '@angular/core';
 
 @Component({
   selector: 'app-body',
@@ -7,7 +7,15 @@ import {Component, HostListener, OnInit} from '@angular/core';
 })
 export class BodyComponent implements OnInit {
 
-  constructor() {
+  button: any;
+
+  constructor(public renderer: Renderer2) {
+    this.button = renderer.createElement('button');
+    this.button.type = 'button';
+    this.button.textContent  = 'Hello'
+    console.log('to button', this.button);
+  // this.button = `<button type="button">Hello</button>`;
+
   }
 
   ngOnInit() {
@@ -22,12 +30,15 @@ export class BodyComponent implements OnInit {
 
     const styl = element.style;
     styl.setProperty('background', '#eeeeee');
+    this.renderer.appendChild(element, this.button);
   }
 
 
-  @HostListener('mouseenter', ['$event'])
+  @HostListener('mouseover', ['$event'])
   onHover(event: MouseEvent): void {
     const element = (<HTMLDivElement>event.target);
-    console.log('hover', element);
+    console.log('hover', event);
+
+    event.preventDefault();
   }
 }
