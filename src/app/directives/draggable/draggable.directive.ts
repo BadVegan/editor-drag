@@ -29,7 +29,6 @@ export class DraggableDirective {
     if (!this.dragging) {
       return;
     }
-
     this.dragMove.emit(event);
   }
 
@@ -40,7 +39,7 @@ export class DraggableDirective {
       return;
     }
     this.dragging = false;
-    // this.dragEnd.emit(event);
+   this.dragEnd.emit(event);
   }
 
 }

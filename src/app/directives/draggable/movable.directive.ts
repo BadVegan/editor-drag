@@ -1,6 +1,7 @@
 import { Directive, ElementRef, HostBinding, HostListener, Input } from '@angular/core';
 import { DraggableDirective } from './draggable.directive';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
+import {AppServiceService} from '../../app-service.service';
 
 interface Position {
   x: number;
@@ -24,38 +25,34 @@ export class MovableDirective extends DraggableDirective {
   private startPosition: Position;
 
   @Input('appMovableReset') reset = false;
+  @Input('toRender') toRender = false;
 
-  constructor(private sanitizer: DomSanitizer, public element: ElementRef) {
+  constructor(private sanitizer: DomSanitizer, public element: ElementRef, private appService: AppServiceService) {
     super();
-    element.nativeElement.draggable = true;
   }
 
   @HostListener('dragStart', ['$event'])
   onDragStart(event: PointerEvent) {
-    console.log('start')
     this.startPosition = {
       x: event.clientX - this.position.x,
       y: event.clientY - this.position.y
-    }
+    };
+    this.appService.addDraged(this.toRender);
   }
 
   @HostListener('dragMove', ['$event'])
   onDragMove(event: PointerEvent) {
-    this.position.x = event.clientX - this.startPosition.x;
-    this.position.y = event.clientY - this.startPosition.y;
+    // this.position.x = event.clientX - this.startPosition.x;
+    // this.position.y = event.clientY - this.startPosition.y;
+
   }
 
-  @HostListener('document:drop', ['$event'])
+  @HostListener('dragEnd', ['$event'])
   onDragEnd(event: PointerEvent) {
-    console.log('end')
     if (this.reset) {
       this.position = {x: 0, y: 0};
     }
-  }
-
-  @HostListener('dragend', ['$event']) blockDrop(e: MouseEvent) {
-    console.log('drop')
-    console.log(this.element.nativeElement);
+    // this.appService.addDraged(null);
   }
 
 }

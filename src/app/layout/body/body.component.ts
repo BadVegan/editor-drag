@@ -1,44 +1,49 @@
-import {Component, HostListener, OnInit, Renderer2} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {AppServiceService} from '../../app-service.service';
 
 @Component({
   selector: 'app-body',
   templateUrl: './body.component.html',
   styleUrls: ['./body.component.css']
 })
-export class BodyComponent implements OnInit {
+export class BodyComponent implements OnInit, AfterViewInit {
 
-  button: any;
+  @ViewChild('wrapper') wrapper: ElementRef;
 
-  constructor(public renderer: Renderer2) {
-    this.button = renderer.createElement('button');
-    this.button.type = 'button';
-    this.button.textContent  = 'Hello'
-    console.log('to button', this.button);
-  // this.button = `<button type="button">Hello</button>`;
-
+  constructor(private appService: AppServiceService, public rendered: Renderer2) {
   }
 
   ngOnInit() {
   }
 
-  @HostListener('click', ['$event'])
-  onClick(event: MouseEvent): void {
-    const element = (<HTMLDivElement>event.target);
-    console.log(event);
-    console.log(element.style);
-    // let st = getComputedStyle(element, null);
-
-    const styl = element.style;
-    styl.setProperty('background', '#eeeeee');
-    this.renderer.appendChild(element, this.button);
+  ngAfterViewInit(): void {
+    console.log('Wrapper', this.wrapper);
   }
 
+  @HostListener('mouseup', ['$event'])
+  onPointerUp(event: PointerEvent): void {
+    console.log('POINTER UP');
+    this.appService.addDroped(event);
+    this.appService.add();
+  }
 
   @HostListener('mouseover', ['$event'])
-  onHover(event: MouseEvent): void {
-    const element = (<HTMLDivElement>event.target);
-    console.log('hover', event);
-
-    event.preventDefault();
+  onMouseOver(event: PointerEvent): void {
+    this.rendered.addClass(event.target, 'hover');
+    // event.preventDefault();
   }
+
+  @HostListener('mouseout', ['$event'])
+  onMouseLeave(event: PointerEvent): void {
+    console.log('POINTER UP');
+    this.rendered.removeClass(event.target, 'hover');
+    // event.preventDefault();
+  }
+
+  @HostListener('mousemove', ['$event'])
+  onMouseMove(event: PointerEvent): void {
+    console.log('MOUSE MOVE')
+
+  }
+
 }

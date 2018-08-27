@@ -23,3 +23,21 @@
 .box:hover {
   border: 1px dotted blue;
 }
+
+
+.myButton {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  margin: 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.hover{
+  cursor: pointer;
+  border: 2px dotted aqua !important;
+}
