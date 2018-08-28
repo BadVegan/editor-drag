@@ -1,6 +1,6 @@
-import { Directive, ElementRef, HostBinding, HostListener, Input } from '@angular/core';
-import { DraggableDirective } from './draggable.directive';
-import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
+import {Directive, ElementRef, HostBinding, HostListener, Input} from '@angular/core';
+import {DraggableDirective} from './draggable.directive';
+import {DomSanitizer, SafeStyle} from '@angular/platform-browser';
 import {AppServiceService} from '../../app-service.service';
 
 interface Position {

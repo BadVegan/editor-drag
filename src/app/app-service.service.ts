@@ -13,13 +13,12 @@ export class AppServiceService {
   }
 
   addDraged(draged) {
+    console.log('draged function', draged)
     this.draged = draged;
-    console.log('addDraged', draged);
   }
 
   addDroped(droppable) {
-    this.droppable = droppable.target;
-    console.log('addDroped', droppable.target.id);
+    this.droppable = droppable;
   }
 
   add() {

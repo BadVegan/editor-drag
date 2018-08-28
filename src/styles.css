@@ -41,3 +41,9 @@
   cursor: pointer;
   border: 2px dotted aqua !important;
 }
+
+.draggable {
+  cursor: pointer;
+  user-select: none;
+}
+

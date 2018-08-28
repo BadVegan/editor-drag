@@ -5,9 +5,11 @@ import { AppComponent } from './app.component';
 import { BoxComponent } from './blocks/box/box.component';
 import {DraggableModule} from './directives/draggable/draggable.module';
 import { BlocksComponent } from './layout/blocks/blocks.component';
-import { BodyComponent } from './layout/body/body.component';
+import {BodyComponent, SafeHtmlPipe} from './layout/body/body.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ButtonComponent } from './blocks/button/button.component';
+import {AbstractBlock} from './blocks/abstract-block';
+import { TextComponent } from './blocks/text/text.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { ButtonComponent } from './blocks/button/button.component';
     BoxComponent,
     BlocksComponent,
     BodyComponent,
-    ButtonComponent
+    ButtonComponent,
+    SafeHtmlPipe,
+    TextComponent
   ],
   imports: [
     BrowserModule,
