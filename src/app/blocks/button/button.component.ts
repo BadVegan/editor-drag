@@ -1,5 +1,4 @@
-import {Component, HostBinding, OnInit, Renderer2, ViewEncapsulation} from '@angular/core';
-import {AppServiceService} from '../../app-service.service';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {AbstractBlock} from '../abstract-block';
 
 @Component({
@@ -10,22 +9,17 @@ import {AbstractBlock} from '../abstract-block';
 })
 export class ButtonComponent extends AbstractBlock implements OnInit {
 
-  // @HostBinding('class.draggable') draggable = true;
-
-  constructor(public renderer: Renderer2, public appService: AppServiceService) {
-    super(renderer, appService);
-  }
 
   ngOnInit() {
   }
 
   getHtmlElement(): HTMLElement {
-    const button = this.renderer.createElement('button');
-    button.type = 'button';
+    const button = this.getRenderer().createElement('button');
     button.textContent = 'Hello';
     button.id = 'Button_ID';
-    this.renderer.addClass(button, 'myButton');
+    this.getRenderer().addClass(button, 'myButton');
     return button;
   }
+
 
 }

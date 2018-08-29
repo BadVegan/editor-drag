@@ -13,7 +13,6 @@ export class AppServiceService {
   }
 
   addDraged(draged) {
-    console.log('draged function', draged)
     this.draged = draged;
   }
 

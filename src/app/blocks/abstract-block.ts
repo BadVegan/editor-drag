@@ -1,14 +1,25 @@
-import {HostBinding, HostListener, Renderer2} from '@angular/core';
+import {AfterContentInit, ElementRef, HostBinding, HostListener, Inject, Injectable, Renderer2, ViewChild} from '@angular/core';
 import {AppServiceService} from '../app-service.service';
+import {DOCUMENT} from '@angular/common';
 
-
-export abstract class AbstractBlock {
+@Injectable()
+export abstract class AbstractBlock implements AfterContentInit {
 
   @HostBinding('class.draggable') draggable = true;
-  isDraging: boolean;
+  private isDraging: boolean;
 
-  protected constructor(public renderer: Renderer2, public appService: AppServiceService) {
+  constructor(private renderer: Renderer2, private appService: AppServiceService, @Inject(DOCUMENT) private document) {
 
+    // console.log('abs', document.getElementById('container'))
+
+    //
+    // this.renderer.listen(document.getElementById('container'), 'click', () => {
+    //   console.log('ABSTRACT')
+    // });
+  }
+
+  protected getRenderer(): Renderer2 {
+    return this.renderer;
   }
 
   @HostListener('pointerdown', ['$event'])
@@ -27,12 +38,17 @@ export abstract class AbstractBlock {
     this.isDraging = false;
   }
 
-  // @HostListener('document:pointermove', ['$event'])
-  // onPointerMove(event: PointerEvent): void {
-  //   // if (!this.isDraging) {
-  //   //   this.appService.addDraged(null);
-  //   // }
-  // }
 
   abstract getHtmlElement(): HTMLElement;
+
+  ngAfterContentInit(): void {
+
+
+   //  // const doc = iFrame.nativeElement.contentDocument || iFrame.nativeElement.contentWindow;
+   //  this.renderer.listen(iFrame, 'pointerup', (event) => {
+   //    console.log('ABSTRACT');
+   //    this.appService.addDroped(event.target);
+   //    this.appService.add();
+   //  });
+  }
 }
